@@ -33,11 +33,15 @@ mysql -u root --password=$MYSQLPASSWORD -e "FLUSH PRIVILEGES"
 # PHP 7.1
 apt-get install -y --allow-downgrades --allow-remove-essential --allow-change-held-packages \
 php7.1-fpm \
-php7.1-gd \
+php7.1-gd php7.1-mcrypt \
 php7.1-curl php7.1-memcached \
 php7.1-imap php7.1-mysql php7.1-mbstring \
 php7.1-xml php7.1-zip php7.1-bcmath php7.1-soap \
 php7.1-intl php7.1-readline
+
+phpenmod mcrypt
+phpenmod mbstring
+phpenmod curl
 
 # PHP Configuration
 
@@ -89,4 +93,12 @@ sudo chmod +x post-receive
 # Create Database
 
 mysql -u root --password=$MYSQLPASSWORD -e "CREATE DATABASE $DATABASENAME"
+
+$ Firewall
+
+ufw allow in "Nginx Full"
+ufw allow 22
+ufw allow 80
+ufw allow 443
+
 
